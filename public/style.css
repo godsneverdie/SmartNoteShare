@@ -1,0 +1,117 @@
+
+body {
+    height: 100%;
+    margin: 0; 
+    font-family: Arial, sans-serif; 
+}
+#sidebar {
+    height: 100%; 
+    width: 250px; 
+    position: fixed; 
+    z-index: 1;
+    top: 0; 
+    left: 0; 
+    background-color: #000000; 
+    padding-top: 60px; 
+    box-shadow: 8px 0 5px rgba(0, 0, 0, 0.5);
+}
+#loggedimg{
+    display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       min-height: 80vh;
+       padding-left: 500;
+       margin: 0;
+}
+#logged-in-text {
+      color: black;             
+      font-size: 2.0em;           
+      font-weight: bold;          
+      text-transform: uppercase;  
+      letter-spacing: 2px;        
+      margin: 0;                  
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);  
+      animation: fadeIn 0.8s ease-out;  
+      padding-left: 578;
+    }
+#sidebar-button{
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+}
+#collapsebtn{
+    background-color: black;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
+#logout{
+     background-color: black;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
+#sidebar.collapsed{
+    display: none;
+}
+#collapsebtn.collapsed{
+    left: 10px;
+}
+#sidebar a {
+    padding: 10px 25px; 
+    text-decoration: none; 
+    font-size: 24px;    
+    color: #96d958; 
+    display: block; 
+    transition: background-color 0.3s, color 0.3s;
+}
+#sidebar a {
+    position: relative; 
+    padding-left: 50px;
+}
+#sidebar a::before {
+    content: "";
+    position: absolute;
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px; 
+    height: 24px;
+    background-image: url('img/bkmrk.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+#sidebar a:hover::before {
+    opacity: 60; 
+}
+#sidebar a:hover {
+    background-color: #8a0000; 
+    color: #000000;
+}
+#login-form{
+    display: block;
+    border: 2px solid;
+    padding-top: 120px;
+    padding-bottom: 20px;
+    background-color: #96d958;
+    align-items: center;
+    justify-content: center;
+    margin-left: 250px;   
+}
+#register-form{
+    display: block;
+    border: 2px solid;
+    padding-top: 120px;
+    padding-bottom: 20px;
+    background-color: #96d958;
+    align-items: center;
+    justify-content: center;
+    margin-left: 250px;
+}
+button[type="submit"]:hover{
+    background-color: #8a0000;
+}
