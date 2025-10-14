@@ -1,0 +1,58 @@
+<div id="uploadbox">
+<form action="/upload" method="POST" id="upload-form">
+  <h2>Upload File</h2>
+  <label for="uniname">University:</label>
+  <select name="uniname" id="uniname" required>
+    <option value="">Select University</option>
+    <option value="GEU">Graphic Era (Deemed to be University)</option>
+    <option value="GEHU">Graphic Era Hill University</option>
+    <option value="other">Other</option>
+  </select>
+  <br><br>
+  <label for="course">Course:</label>
+  <select name="course" id="course" required>
+    <option value="">Select Course</option>
+    <option value="BCA">BCA</option>
+    <option value="BSc IT">BSc IT</option>
+    <option value="BTech">BTech</option>
+    <option value="MCA">MCA</option>
+    <option value="MTech">MTech</option>
+  </select>
+  <br><br>
+  <label for="semester">Semester:</label>
+  <select name="semester" id="semester" required>
+    <option value="">Select Semester</option>
+  </select>
+  <br><br>
+  <label for="subject">Subject:</label>
+  <input type="text" name="subject" id="subject" required>
+  <br><br>
+  <label for="file">Select File:</label>
+  <input type="file" name="file" id="file" required>
+  <br><br>
+  <button type="submit">Upload</button>
+</form>
+</div>
+<script>
+  const courseSelect = document.getElementById('course');
+  const semesterSelect = document.getElementById('semester');
+  const semesterOptions = {
+    "BCA": [1, 2, 3, 4, 5, 6],
+    "BSc IT": [1, 2, 3, 4, 5, 6],
+    "BTech": [1, 2, 3, 4, 5, 6, 7, 8],
+    "MCA": [1, 2, 3, 4],
+    "MTech": [1, 2, 3, 4]
+  };
+  courseSelect.addEventListener('change', function() {
+    const selectedCourse = this.value;
+    semesterSelect.innerHTML = '<option value="">Select Semester</option>';
+    if (selectedCourse && semesterOptions[selectedCourse]) {
+      semesterOptions[selectedCourse].forEach(num => {
+        const opt = document.createElement('option');
+        opt.value = num;
+        opt.textContent = 'Semester ' + num;
+        semesterSelect.appendChild(opt);
+      });
+    }
+  });
+</script>

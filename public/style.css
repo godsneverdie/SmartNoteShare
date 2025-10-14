@@ -67,6 +67,22 @@ body {
     display: block; 
     transition: background-color 0.3s, color 0.3s;
 }
+#uploadbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    border: 10px black;
+    border-width: 10px;
+}
+#upload-form{
+    background: 96d958;
+    padding: 10px 15px;
+    border-radius: 15px;
+    display: flex;
+    gap: 1px;
+    flex-direction: column;
+}
 #sidebar a {
     position: relative; 
     padding-left: 50px;
@@ -92,25 +108,37 @@ body {
     background-color: #8a0000; 
     color: #000000;
 }
-#login-form{
-    display: block;
-    border: 2px solid;
-    padding-top: 120px;
-    padding-bottom: 20px;
-    background-color: #96d958;
+#loginbox{
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 250px;   
+    height: 100vh;
+    border: 10px black;
+    border-width: 10px;
+}
+#login-form{
+    background: 96d958;
+    padding: 10px 15px;
+    border-radius: 15px;
+    display: flex;
+    gap: 1px;
+    flex-direction: column;  
+}
+#registerbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    border: 10px black;
+    border-width: 10px;
 }
 #register-form{
-    display: block;
-    border: 2px solid;
-    padding-top: 120px;
-    padding-bottom: 20px;
-    background-color: #96d958;
-    align-items: center;
-    justify-content: center;
-    margin-left: 250px;
+    background: 96d958;
+    padding: 10px 15px;
+    border-radius: 15px;
+    display: flex;
+    gap: 1px;
+    flex-direction: column;
 }
 button[type="submit"]:hover{
     background-color: #8a0000;
