@@ -99,5 +99,5 @@ app.use('/', uploadRoutes.router);
 
 // Start server
 app.listen(3000, () => {
-  console.log("Server started: http://localhost:3000");
+  console.log("Servxer started: http://localhost:3000");
 });
