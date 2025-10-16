@@ -89,9 +89,58 @@ app.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect('/login');
 });
-app.get("/download", (req, res) => {
-  res.render("download", { title: "Download" });
+app.get("/download", async (req, res, next) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
+    try {
+        // Fetch ALL file records, ordered by latest upload time
+        const result = await pool.query('SELECT * FROM files ORDER BY uploaded_at DESC');
+        const files = result.rows;
+
+        res.render("download", { 
+            title: "Download",
+            files: files // Pass the array of file objects
+        });
+    } catch (err) {
+        console.error("Error fetching files for download:", err);
+        next(err); 
+    }
 });
+// In app.js
+app.get("/listing/:fileId", async (req, res, next) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
+    const fileId = req.params.fileId;
+
+    try {
+        // 1. Fetch the specific file record
+        const result = await pool.query('SELECT * FROM files WHERE file_id = $1', [fileId]);
+        const file = result.rows[0];
+
+        if (!file) {
+            return res.status(404).render('error', { title: "404 Not Found", message: "File listing not found." });
+        }
+
+        // 2. Render the new 'listing-detail' view
+        res.render("listing-detail", { 
+            title: file.filename, // Use filename as the page title
+            file: file, // Pass the single file object
+            // Function to format date cleanly
+            formatDate: (date) => new Date(date).toLocaleString()
+        });
+
+    } catch (err) {
+        console.error("Error fetching file detail:", err);
+        next(err);
+    }
+});
+
+// REMINDER: Keep the download route for the actual file transfer
+app.get("/download/file/:fileId", /* ... your existing download logic ... */);
 
 // Mount auth and upload routes
 app.use('/', authRouter);

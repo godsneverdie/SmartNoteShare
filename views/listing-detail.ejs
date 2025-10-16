@@ -1,0 +1,58 @@
+<div class="listing-detail-container">
+    <h1><%= file.filename %></h1>
+    
+    <div class="metadata">
+        <p><strong>University:</strong> <%= file.university_name %></p>
+        <p><strong>Course:</strong> <%= file.course %></p>
+        <p><strong>Semester:</strong> <%= file.semester %></p>
+        <p><strong>Subject:</strong> <%= file.subject %></p>
+        <p><strong>Uploaded On:</strong> <%= formatDate(file.uploaded_at) %></p>
+        </div>
+
+    <hr>
+    
+    <a href="/download/file/<%= file.file_id %>" class="btn-download">
+        Download File ( <%= file.filename %> )
+    </a>
+
+</div>
+
+<style>
+.listing-detail-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.listing-detail-container h1 {
+    color: #343a40;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+.metadata p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+.metadata strong {
+    color: #007bff;
+    display: inline-block;
+    width: 120px; /* Aligns the data values */
+}
+.btn-download {
+    display: inline-block;
+    padding: 12px 25px;
+    margin-top: 20px;
+    background-color: #28a745; /* Green color for download */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+}
+.btn-download:hover {
+    background-color: #218838;
+}
+</style>
