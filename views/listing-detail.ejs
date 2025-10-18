@@ -1,31 +1,91 @@
-<div class="listing-detail-container">
-    <h1><%= file.filename %></h1>
-    
-    <div class="metadata">
-        <p><strong>University:</strong> <%= file.university_name %></p>
-        <p><strong>Course:</strong> <%= file.course %></p>
-        <p><strong>Semester:</strong> <%= file.semester %></p>
-        <p><strong>Subject:</strong> <%= file.subject %></p>
-        <p><strong>Uploaded On:</strong> <%= formatDate(file.uploaded_at) %></p>
+<div class="two-column-layout">
+    <div class="listing-details">
+        <div class="listing-detail-container">
+            <h1><%= file.filename %></h1>
+            
+            <div class="metadata">
+                <p><strong>University:</strong> <%= file.university_name %></p>
+                <p><strong>Course:</strong> <%= file.course %></p>
+                <p><strong>Semester:</strong> <%= file.semester %></p>
+                <p><strong>Subject:</strong> <%= file.subject %></p>
+                <p><strong>Uploaded On:</strong> <%= formatDate(file.uploaded_at) %></p>
+            </div>
+
+            <hr>
+            
+            <a href="/download/file/<%= file.file_id %>" class="btn-download">
+                Download File ( <%= file.filename %> )
+            </a>
+            
+            <!-- SUMMARY SECTION -->
+            <div class="summary-section" style="margin-top: 30px;">
+                <h3>AI-Generated Summary</h3>
+                <p><%= file.summary || "Summary is not yet available for this document." %></p>
+            </div>
+            <!-- END SUMMARY SECTION -->
+
         </div>
-
-    <hr>
+    </div>
     
-    <a href="/download/file/<%= file.file_id %>" class="btn-download">
-        Download File ( <%= file.filename %> )
-    </a>
+    <!-- FILE VIEWER/PREVIEW SECTION -->
+    <div class="file-viewer-container">
+        <h2>File Preview</h2>
+        
+        <% 
+            const isPdf = file.filename.toLowerCase().endsWith('.pdf');
+        %>
+        
+        <% if (isPdf) { %>
+            <!-- Use the publicUrl passed from the server for the iframe src -->
+            <iframe src="<%= publicUrl %>" width="100%" height="600px" style="border: none;"></iframe>
+        <% } else { %>
+            <p>File preview is not available or is not a supported file type (e.g., PDF) for direct viewing.</p>
+            <p>File type detected: **<%= file.filename.split('.').pop().toUpperCase() %>**</p>
+            <p>Please use the download button.</p>
+        <% } %>
 
+    </div>
 </div>
 
 <style>
-.listing-detail-container {
-    max-width: 800px;
+/* --- STYLES --- */
+.two-column-layout {
+    display: flex;
+    max-width: 1200px; 
     margin: 40px auto;
+    gap: 30px;
+}
+
+.listing-details {
+    flex: 3; /* Takes 2/3 of the space */
+    min-width: 400px;
+    padding-left: 210px;
+}
+
+.file-viewer-container {
+    flex: 2; /* Takes 1/3 of the space */
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.file-viewer-container h2 {
+    color: #343a40;
+    margin-top: 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.listing-detail-container {
+    max-width: none;
+    margin: 0; 
     padding: 20px;
     background: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
 .listing-detail-container h1 {
     color: #343a40;
     margin-bottom: 20px;
@@ -39,13 +99,13 @@
 .metadata strong {
     color: #007bff;
     display: inline-block;
-    width: 120px; /* Aligns the data values */
+    width: 120px; 
 }
 .btn-download {
     display: inline-block;
     padding: 12px 25px;
     margin-top: 20px;
-    background-color: #28a745; /* Green color for download */
+    background-color: #28a745; 
     color: white;
     text-decoration: none;
     border-radius: 5px;
