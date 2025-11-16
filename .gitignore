@@ -8,7 +8,7 @@ text_summarization/
 
 # Environment variables
 .env
-
+uploads/
 # Production
 build/
 dist/
