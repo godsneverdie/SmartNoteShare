@@ -5,10 +5,9 @@ node_modules/
 logs
 *.log
 text_summarization/
-
+uploads/
 # Environment variables
 .env
-uploads/
 # Production
 build/
 dist/

@@ -1,0 +1,4 @@
+This repository is for PBL for my final year BSc IT course. 
+---------------------------------
+The working of this proposed system begins with users logging in or registering a new user, after successful creation of the session token, the user will be able to upload and download notes, the user will be able to u The subject was Web Development, so Node.js was used for runtime environment for the execution of Javascript and expressJs was used to serve dynamic webpages and also serve data dynamically using the database. The database used was PostGreSQL and using PgAdmin4 GUI tools.
+add observation 
