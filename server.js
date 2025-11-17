@@ -7,12 +7,8 @@ const session = require('express-session');
 // Auth routes
 const authRoutes = require('./public/auth.js');
 const { router: authRouter } = require("./public/auth");
-
-// Upload routes
 const uploadRoutes = require('./public/upload');
-
 const app = express();
-
 // PostgreSQL pool
 const pool = new Pool({
   user: 'postgres',
@@ -103,7 +99,7 @@ app.get("/download", async (req, res, next) => {
 
         res.render("download", { 
             title: "Download",
-            files: files // Pass the array of file objects
+            files: files 
         });
     } catch (err) {
         console.error("Error fetching files for download:", err);
@@ -111,29 +107,27 @@ app.get("/download", async (req, res, next) => {
     }
 });
 
-// LISTING DETAIL ROUTE: Now passes the calculated public URL
+// LISTING DETAIL ROUTE
 app.get("/listing/:fileId", async (req, res, next) => {
     if (!req.session.user) {
         return res.redirect('/login');
     }
     const fileId = req.params.fileId;
     try {
-        // 1. Fetch the specific file record
+        
         const result = await pool.query('SELECT * FROM files WHERE file_id = $1', [fileId]);
         const file = result.rows[0];
         if (!file) {
             return res.status(404).render('error', { title: "404 Not Found", message: "File listing not found." });
         }
         
-        // Calculate the public URL for the iframe view
         const publicUrl = `/uploads/${file.filename}`;
 
-        // 2. Render the new 'listing-detail' view
+        
         res.render("listing-detail", { 
-            title: file.filename, // Use filename as the page title
-            file: file, // Pass the single file object
-            publicUrl: publicUrl, // <-- PASS THE PUBLIC URL
-            // Function to format date cleanly
+            title: file.filename, 
+            file: file,
+            publicUrl: publicUrl, 
             formatDate: (date) => new Date(date).toLocaleString()
         });
     } catch (err) {
@@ -141,31 +135,21 @@ app.get("/listing/:fileId", async (req, res, next) => {
         next(err);
     }
 });
-
-// DOWNLOAD ROUTE: Retrieves the actual file path and sends the file
 app.get("/download/file/:fileId", async (req, res, next) => {
     if (!req.session.user) {
         return res.redirect('/login');
     }
-
     const fileId = req.params.fileId;
-
     try {
-        // 1. Look up the file path using the file ID
         const result = await pool.query('SELECT filename, filepath FROM files WHERE file_id = $1', [fileId]);
         const file = result.rows[0];
-
         if (!file) {
             return res.status(404).send('File not found in database.');
         }
-
-        const filePath = file.filepath; // Absolute path used for res.download
+        const filePath = file.filepath; 
         const fileName = file.filename;
-
-        // 2. Send the file using Express's res.download() method
         res.download(filePath, fileName, (err) => {
             if (err) {
-                // Handle errors, e.g., file doesn't exist on disk or permissions issue
                 console.error(`Error downloading file ${filePath}:`, err);
                 if (!res.headersSent) {
                     res.status(500).send("Could not download the file.");
@@ -179,12 +163,8 @@ app.get("/download/file/:fileId", async (req, res, next) => {
     }
 });
 
-
-// Mount auth and upload routes
 app.use('/', authRouter);
 app.use('/', uploadRoutes.router);
-
-// Start server
 app.listen(3000, () => {
   console.log("Servxer started: http://localhost:3000");
 });
