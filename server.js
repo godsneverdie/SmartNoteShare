@@ -1,3 +1,7 @@
+const multer = require('multer');
+const pdf = require('pdf-parse');
+const axios = require('axios');
+const fs = require('fs');
 const express = require("express");
 const path = require("path");
 const { Pool } = require("pg");
@@ -37,9 +41,6 @@ app.use(session({
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")));
-
-// --- FIX: CORRECTLY SERVE THE 'upload' DIRECTORY ---
-// This tells Express to serve files from the './upload' folder when the URL path starts with '/uploads'.
 app.use('/uploads', express.static(path.join(__dirname, 'upload'))); 
 
 // Layout wrapper for EJS
@@ -162,7 +163,6 @@ app.get("/download/file/:fileId", async (req, res, next) => {
         next(err);
     }
 });
-
 app.use('/', authRouter);
 app.use('/', uploadRoutes.router);
 app.listen(3000, () => {

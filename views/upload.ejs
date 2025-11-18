@@ -31,6 +31,22 @@
   <input type="file" name="file" id="file" required>
   <br><br>
   <button type="submit">Upload</button>
+  <div id="loading-overlay" style="display: none;">
+    <div class="ai-matrix-loader">
+        <div class="digit">0</div>
+        <div class="digit">1</div>
+        <div class="digit">0</div>
+        <div class="digit">1</div>
+        <div class="digit">0</div>
+        <div class="digit">1</div>
+        <div class="digit">0</div>
+        <div class="digit">1</div>
+        <div class="glow"></div>
+    </div>
+    <p style="text-align: center; color: #00ff88; font-family: monospace;">
+        Uploading & AI Summarizing...
+    </p>
+</div>  
 </form>
 </div>
 <script>
@@ -55,4 +71,13 @@
       });
     }
   });
+  const form = document.querySelector('form'); // Select your upload form
+    const loader = document.getElementById('loading-overlay');
+
+    if(form) {
+        form.addEventListener('submit', function() {
+            // Show the matrix loader
+            loader.style.display = 'flex';
+        });
+    }
 </script>
