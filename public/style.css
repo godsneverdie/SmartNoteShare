@@ -101,7 +101,6 @@ body {
     opacity: 0;
     transition: opacity 0.3s;
 }
-
 #sidebar a:hover::before {
     opacity: 60; 
 }

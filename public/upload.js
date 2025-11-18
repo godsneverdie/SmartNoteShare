@@ -1,24 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const path = require('path');
+const path = require('path'); // We need this for path.resolve
 const fs = require('fs');
-const axios = require('axios'); // We still need Axios
-
-// REMOVED: const pdf = require('pdf-parse'); <-- No longer needed!
+const axios = require('axios');
 
 let pool;
 function setPool(p) {
   pool = p;
 }
 
-// Ensure upload directory
 const uploadDir = path.join(__dirname, '..', 'upload');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Multer config (Keep the URL fix)
+// Clean filename storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadDir);
@@ -43,17 +40,20 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
     const userid = req.session.user.userid;
     const filename = req.file.filename;
-    const filepath = req.file.path; // This is the full path on your disk
     const { uniname, course, semester, subject } = req.body;
 
-    // --- SIMPLIFIED AI LOGIC ---
+    // --- FIXED AI LOGIC ---
     let summary = "Summary unavailable";
 
     try {
-      // We just send the FILEPATH to Python
-      // Python will open the file and read it
+      // 1. GET ABSOLUTE PATH (C:\Users\...\upload\file.pdf)
+      const fullPath = path.resolve(req.file.path);
+
+      console.log("Sending path to Python:", fullPath); // Debug log
+
+      // 2. Send full path to Python
       const flaskResponse = await axios.post('http://127.0.0.1:5000/summarize', {
-        filepath: filepath 
+        filepath: fullPath 
       });
 
       if (flaskResponse.data && flaskResponse.data.summary) {
@@ -61,13 +61,15 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       }
 
     } catch (aiError) {
-      console.error("AI Summarization failed:", aiError.message);
+      // Improved error logging
+      const msg = aiError.response ? JSON.stringify(aiError.response.data) : aiError.message;
+      console.error("AI Summarization failed:", msg);
     }
-    // ---------------------------
+    // ----------------------
 
     await pool.query(
       'INSERT INTO files (filename, filepath, university_name, course, semester, subject, userid, summary) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-      [filename, filepath, uniname, course, semester, subject, userid, summary]
+      [filename, req.file.path, uniname, course, semester, subject, userid, summary]
     );
 
     res.redirect('/download');
