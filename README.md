@@ -32,7 +32,7 @@ _A smart note sharing platform built on NodeJS and uses LLM with transfer learni
 - **Frontend Templating:** [EJS](https://ejs.co/)
 - **Styling:** CSS
 - **AI/ML:** Integration with LLM models (implementation details/choice may vary)
-- **Database:** _(Specify here if you use MongoDB, PostgreSQL, etc.)_
+- **Database:** PostgreSQL
 
 **Language Composition:**
 - JavaScript: 44.1%
@@ -109,4 +109,3 @@ This workflow aims to enhance knowledge sharing by making large amounts of textu
 - Register or log in to your account.
 - Upload notes via the dashboard.
 - View AI-generated summaries alongside the full notes.
-- Search, comment, and collaborate with other users.
