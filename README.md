@@ -114,8 +114,8 @@ The SmartNoteShare workflow ensures seamless note sharing and intelligent summar
    graph TD
    A[User uploads note] --> B[Node.js Backend receives note]
    B --> C[Store note in database]
-   C --> D[LLM processes note]
-   D --> E[Transfer learning applied for summarization]
+   C --> D[Text extracted from document]
+   D --> E[LLM gets the text]
    E --> F[Generate summary]
    F --> G[Store summary]
    G --> H[Display summary to user]
