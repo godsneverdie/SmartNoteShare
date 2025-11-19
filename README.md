@@ -31,7 +31,7 @@ _A smart note sharing platform built on NodeJS and uses LLM with transfer learni
 - **Backend:** [Node.js](https://nodejs.org/)
 - **Frontend Templating:** [EJS](https://ejs.co/)
 - **Styling:** CSS
-- **AI/ML:** Integration with LLM models (implementation details/choice may vary)
+- **AI/ML:** T5-large 
 - **Database:** PostgreSQL
 
 **Language Composition:**
