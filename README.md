@@ -122,9 +122,7 @@ The SmartNoteShare workflow ensures seamless note sharing and intelligent summar
    H --> I[User shares summarized note]
    ```
    </div>
-
 This workflow aims to enhance knowledge sharing by making large amounts of textual information more accessible and manageable for everyone.
-
 ## Usage
 
 - Register or log in to your account.
