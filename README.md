@@ -10,8 +10,6 @@ _A smart note sharing platform built on NodeJS and uses LLM with transfer learni
 - [Getting Started](#getting-started)
 - [Workflow](#workflow)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
@@ -104,7 +102,7 @@ The SmartNoteShare workflow ensures seamless note sharing and intelligent summar
 4. **Note Management:**  
    Uploaded notes, along with their AI-generated summaries, are stored in each user’s profile for easy access and management.
 5. **Sharing & Collaboration:**  
-   Users can share notes publicly or with specific peers, allowing for collaborative learning and knowledge exchange.
+   Users can share notes publicly, allowing for collaborative learning and knowledge exchange.
 6. **Search & Discovery:**  
    The intelligent search system (current or planned) enables users to find notes and summaries quickly based on keywords or topics.
 7. **Viewing & Discussion:**  
