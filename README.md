@@ -12,7 +12,6 @@ _A smart note sharing platform built on NodeJS and uses LLM with transfer learni
 - [Usage](#usage)
 
 ## Overview
-
 **SmartNoteShare** is a collaborative platform for sharing notes enhanced by artificial intelligence. It leverages advanced language models (LLMs) with transfer learning to automatically summarize the content of uploaded notes, making it easier and faster for users to review and digest information.
 
 ## Features
